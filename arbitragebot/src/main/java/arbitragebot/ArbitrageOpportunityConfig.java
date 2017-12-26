@@ -38,4 +38,15 @@ public class ArbitrageOpportunityConfig {
     public double getThreshold() {
         return threshold;
     }
+
+    @Override
+    public String toString() {
+        return "ArbitrageOpportunityConfig{" +
+                "buyExchange=" + buyExchange +
+                ", sellExchange=" + sellExchange +
+                ", currencyPair=" + currencyPair +
+                ", amount=" + amount +
+                ", threshold=" + threshold +
+                '}';
+    }
 }
