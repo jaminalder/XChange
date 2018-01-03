@@ -20,7 +20,7 @@ public class ArbitrageFinder {
 
     private static final Logger log = LoggerFactory.getLogger(ArbitrageFinder.class);
 
-    //private final Exchange cexExchange = ExchangeFactory.INSTANCE.createExchange(CexIOExchange.class.getName());
+    private final Exchange cexExchange = ExchangeFactory.INSTANCE.createExchange(CexIOExchange.class.getName());
     private final Exchange poloniexExchange = ExchangeFactory.INSTANCE.createExchange(PoloniexExchange.class.getName());
     private final Exchange krakenExchange = ExchangeFactory.INSTANCE.createExchange(KrakenExchange.class.getName());
     private final Exchange bittrexExchange = ExchangeFactory.INSTANCE.createExchange(BittrexExchange.class.getName());
@@ -46,7 +46,9 @@ public class ArbitrageFinder {
 
     private void run() throws InterruptedException {
 
-        List<ArbitrageOpportunityChecker> checkers = createCheckers(poloniexExchange, krakenExchange, currencyPairs);
+        List<ArbitrageOpportunityChecker> checkers = createCheckers(cexExchange, krakenExchange, currencyPairs);
+        checkers.addAll(createCheckers(krakenExchange, cexExchange, currencyPairs));
+        checkers.addAll(createCheckers(poloniexExchange, krakenExchange, currencyPairs));
         checkers.addAll(createCheckers(poloniexExchange, bittrexExchange, currencyPairs));
         checkers.addAll(createCheckers(poloniexExchange, bitfinexExchange, currencyPairs));
         checkers.addAll(createCheckers(poloniexExchange, hitbtcExchange, currencyPairs));

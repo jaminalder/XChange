@@ -31,7 +31,7 @@ public class ArbitrageOpportunityChecker {
             double percentChange = percentChange(askPrice, bidPrice);
             return new ArbitrageOpportunityResult(config, percentChange > config.getThreshold(), percentChange, askPrice, bidPrice);
         } catch (Exception e) {
-            log.warn("error while arbitrage check for " + config, e);
+            log.warn("error while arbitrage check for " + config + ": " + e.getMessage());
             return new ArbitrageOpportunityResult(config, false, 0.0, 0.0, 0.0);
         }
     }

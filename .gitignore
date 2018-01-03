@@ -40,3 +40,6 @@ GTAGS
 GRTAGS
 GPATH
 GSYMS
+
+# key files
+*Keys.java
